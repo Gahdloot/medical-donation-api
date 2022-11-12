@@ -4,6 +4,9 @@ from .models import Client
 from .serializer import ClientSerializer
 
 
+def sign_up(request):
+    pass
+
 
 @api_view(['GET'])
 def get_patients(request):

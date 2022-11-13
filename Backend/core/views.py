@@ -5,6 +5,8 @@ from .serializer import ClientSerializer
 
 
 def sign_up(request):
+    user = request.data
+    
     pass
 
 

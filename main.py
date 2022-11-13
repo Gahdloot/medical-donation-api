@@ -4,7 +4,7 @@ import requests
 url= 'https://sandbox.myidentitypass.com/api/v2/biometrics/merchant/data/verification/bvn_validation'
 
 parameter = {
-    'number': 22485750837
+    "number": 224875859043
 }
 
 headers = {
@@ -15,4 +15,5 @@ headers = {
 
 response = requests.post(url, params=parameter, headers=headers)
 
-print(response.json())
+print(response.json()["detail"]['numbeoo'])
+

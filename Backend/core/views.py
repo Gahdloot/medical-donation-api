@@ -3,7 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Client
 from .serializer import ClientSerializer
-from verification import Verify
+from .verification import Verify
 
 
 def sign_up(request):
@@ -53,4 +53,9 @@ def set_patient_status(request):
     client.wants_to_donate= client_info.wants_to_donate
     client.save()
     return Response()
+
+
+@api_view(['GET'])
+def home(request):
+    return Response({'memmemmeme': 'Valid'})
     

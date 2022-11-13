@@ -9,7 +9,7 @@ class Client(models.Model):
     name = models.CharField(max_length=200)
     phone_number = models.CharField(max_length=200)
     email = models.EmailField(max_length=254, unique=True)
-    bvn = models.IntegerField(default=19777393820)
+    bvn = models.IntegerField(default=54651333604)
     #password = models.CharField(_('password'), max_length=128, defaults='sha234')
     password = models.CharField(max_length=128, default='sha234')
     location = models.CharField(max_length=200)

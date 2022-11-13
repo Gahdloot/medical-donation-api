@@ -1,15 +1,20 @@
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from rest_framework import status
 from .models import Client
 from .serializer import ClientSerializer
+from verification import Verify
 
 
 def sign_up(request):
     user = request.data
-    
-    client = Client(name=user.name, phone_number=user.phone_number, email=user.email, bvn=user.bvn, password=user.password, location=user.location, age=user.age, weight=user.weight, blood_group=user.blood_group)
+    user.bvn = 54651333604
 
-    pass
+    if Verify().bvn_verification(number=user.bvn):
+        client = Client(name=user.name, phone_number=user.phone_number, email=user.email, bvn=user.bvn, password=user.password, location=user.location, age=user.age, weight=user.weight, blood_group=user.blood_group)
+        client.save()
+        return Response({'message':'created'}, status=status.HTTP_201_CREATED)
+    return Response({'message':'information wasnt verified'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
 @api_view(['GET'])

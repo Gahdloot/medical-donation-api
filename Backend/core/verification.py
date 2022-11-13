@@ -10,10 +10,10 @@ class Verify:
     'app-id': 'e9265dad-9424-420c-8290-e0b19a7944d7'
 }
 
-    def bvn_verification(**kwargs):
+    def bvn_verification(self,**kwargs):
         response = requests.post(Verify.URL, data=kwargs, headers=Verify.HEADERS)
 
-        if response.json()['status'] == True and response.json()["detail"]["verification"] == "VERIFIED":
+        if response.json()['status'] == True and response.json()['verification']["status"] == "VERIFIED":
             return True
         return False
 

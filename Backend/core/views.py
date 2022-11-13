@@ -2,18 +2,22 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import status
 from .models import Client
-from .serializer import ClientSerializer
+from .serializer import ClientSerializer, ClientCreationSerializer
 from .verification import Verify
 
-
+@api_view(['POST'])
 def sign_up(request):
     user = request.data
     user.bvn = 54651333604
 
     if Verify().bvn_verification(number=user.bvn):
-        client = Client(name=user.name, phone_number=user.phone_number, email=user.email, bvn=user.bvn, password=user.password, location=user.location, age=user.age, weight=user.weight, blood_group=user.blood_group)
-        client.save()
-        return Response({'message':'created'}, status=status.HTTP_201_CREATED)
+        # client = Client(name=user.name, phone_number=user.phone_number, email=user.email, bvn=user.bvn, password=user.password, location=user.location, age=user.age, weight=user.weight, blood_group=user.blood_group)
+        # client.save()
+        serializer = ClientCreationSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({'message':'created'}, status=status.HTTP_201_CREATED)
+        return Response({'message':'something is wrong with the data'})
     return Response({'message':'information wasnt verified'}, status=status.HTTP_406_NOT_ACCEPTABLE)
 
 
@@ -27,6 +31,14 @@ def get_patients(request):
     patient_filter = Client.objects.filter(needs_donation=True, blood_group=request.data.blood_group).all()
     serializer = ClientSerializer(patient_filter, many=True)
     return Response(serializer) 
+
+@api_view(['GET'])
+def get_all_clients(request):
+    
+    patient_filter = Client.objects.all()
+    serializer = ClientSerializer(patient_filter, many=True)
+    return Response(serializer)
+    
 
 
 @api_view(['POST'])

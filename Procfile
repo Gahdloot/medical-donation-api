@@ -1,0 +1,1 @@
+web gunicorn live_giver.wsgi:application --log-file -

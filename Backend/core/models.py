@@ -11,7 +11,7 @@ class Client(models.Model):
     email = models.EmailField(max_length=254, unique=True)
     bvn = models.IntegerField(default=19777393820)
     #password = models.CharField(_('password'), max_length=128, defaults='sha234')
-    password = models.CharField(max_length=128, defaults='sha234')
+    password = models.CharField(max_length=128, default='sha234')
     location = models.CharField(max_length=200)
     age = models.IntegerField(default=19)
     weight = models.IntegerField(default=130)

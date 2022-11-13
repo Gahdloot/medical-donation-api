@@ -6,7 +6,8 @@ from .serializer import ClientSerializer
 
 def sign_up(request):
     user = request.data
-    client = Client(name=user.name, phone_number=user.phone_number, email=user.email, bvn=user.bvn, password=user.password, location=user.location)
+    
+    client = Client(name=user.name, phone_number=user.phone_number, email=user.email, bvn=user.bvn, password=user.password, location=user.location, age=user.age, weight=user.weight, blood_group=user.blood_group)
 
     pass
 

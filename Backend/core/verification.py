@@ -11,10 +11,9 @@ class Verify:
 }
 
     def bvn_verification(**kwargs):
-        response = requests.post(Verify.URL, params=kwargs, headers=Verify.HEADERS)
+        response = requests.post(Verify.URL, data=kwargs, headers=Verify.HEADERS)
 
         if response.json()['status'] == True and response.json()["detail"]["verification"] == "VERIFIED":
             return True
         return False
 
-    
